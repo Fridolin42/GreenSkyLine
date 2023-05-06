@@ -104,7 +104,11 @@ app.post("/api/exercise/select", (req, res) => {
 })
 
 app.post("/api/exercise/solve", (req, res) => {
-
+    let exercise = req.body.exercise
+    let username = req.cookies.username
+    let city = req.body.city
+    users[username].completedExercises.push(exercise)
+    fs.writeFileSync(__dirname + "/db/users.json", JSON.stringify(users))
 })
 
 app.get("/", (req, res) => {
@@ -121,9 +125,11 @@ app.get("/api/exercises/list", (req, res) => {
 
     }
 })
-app.get("/api/exercices/get", (req, res) => {
-    let exercisesSpecial = req.city.exercises
-    res.send(exercisesCity)
+app.get("/api/exercises/get", (req, res) => {
+    let city = req.body.city
+    let id = req.body.id
+    let exercise = exercises[city][id]
+    res.send(exercise)
 })
 
 app.listen(1337, () => {
