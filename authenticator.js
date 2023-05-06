@@ -1,8 +1,6 @@
 const router = require("express").Router
 
-router.get("/api/user/info", authenticate)
-router.get("/api/exercise/select", authenticate)
-router.get("/api/exercise/solve", authenticate)
+
 
 function authenticate(req, res, next) {
     const users = require(__dirname + "/db/user.json")

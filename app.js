@@ -13,7 +13,20 @@ app.use(express.urlencoded({
 
 app.use(cookieParser());
 
-app.use(authenticator)
+app.use("/api/user/info", authenticate)
+app.use("/api/exercise/select", authenticate)
+app.use("/api/exercise/solve", authenticate)
+
+function authenticate(req, res, next) {
+    const users = require(__dirname + "/db/user.json")
+    let username = req.cookies.username
+    let password = req.cookies.password
+
+
+    let user = users[username]
+    if (user != null && user["password"] === password) next()
+    else return res.redirect("/login")
+}
 
 app.get("/api/user/info", (req, res) => {
     let username = req.body.name
@@ -75,19 +88,17 @@ app.post("/api/exercise/solve", (req, res) => {
 app.get("/", (req, res) => {
     res.send("Hello")
 })
-app.get("api/exercises/list", (req, res) => {
-    for (const exercise of exercises [req.body.city]) {
-        let exercisesCity = []
+app.get("/api/exercises/list", (req, res) => {
+    let exercisesCity = []
+    for (const i in exercises[req.body.city]) {
         exercisesCity.push({
-            "title": exercise.title,
-            "description": exercise.description,
-            "points": exercises.points
+            "title": exercises[req.body.city][i].title,
+            "description": exercises[req.body.city][i].description,
+            "points": exercises[req.body.city][i].points
         })
-        exercisesCity[1].push
 
     }
-
-
+    res.send(exercisesCity)
 })
 
 
