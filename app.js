@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const cookieParser = require("cookie-parser")
 const users = require(__dirname + "/db/user.json")
+const exercises =require(_dirname + "/db/exercises.json")
 const fs = require("fs")
 
 app.use(express.json());
@@ -73,8 +74,22 @@ app.post("/", (req, res) => {
     number *= 3
     res.send({number: number})
 })
+app.get("api/exercises/list",(req,res)=>{
+    for (const exercise of  exercises [req.body.city] ){
+        let exercisesCity =[]
+        exercisesCity.push ({
+            "title":exercise.title,
+            "description":exercise.description,
+            "points":exercises.points
+        })
+        exercisesCity[1].push 
+    
+    }
+    
+    
+})
+
 
 app.listen(1337, () => {
     console.log("Server started: http://localhost:1337")
-//das ist ein Kommentar
 })
