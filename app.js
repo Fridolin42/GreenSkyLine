@@ -2,7 +2,7 @@ const express = require("express")
 const app = express()
 const cookieParser = require("cookie-parser")
 const users = require(__dirname + "/db/user.json")
-const exercises = require(_dirname + "/db/exercises.json")
+const exercises = require(__dirname + "/db/exercises.json")
 const fs = require("fs")
 const authenticator = require("./authenticator.js")
 
@@ -72,12 +72,8 @@ app.post("/api/exercise/solve", (req, res) => {
 
 })
 
-app.post("/", (req, res) => {
-    let number = req.body.number
-    console.log(req.body)
-    if (number == null) number = 0
-    number *= 3
-    res.send({number: number})
+app.get("/", (req, res) => {
+    res.send("Hello")
 })
 app.get("api/exercises/list", (req, res) => {
     for (const exercise of exercises [req.body.city]) {
