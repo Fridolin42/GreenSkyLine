@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser")
 const users = require(__dirname + "/db/user.json")
 const exercises =require(_dirname + "/db/exercises.json")
 const fs = require("fs")
-const authenticator = require("./authenticator.js")
+const { title } = require("process")
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -13,7 +13,14 @@ app.use(express.urlencoded({
 
 app.use(cookieParser());
 
-app.use(authenticator)
+app.get("/api/user/info", (req, res, next) => {
+    let username = req.cookies.username
+    let password = req.cookies.password
+
+    let user = users[username]
+    if (user != null && user["password"] === password) next()
+    else return res.redirect("/login")
+})
 
 app.get("/api/user/info", (req, res) => {
     let username = req.body.name
@@ -61,14 +68,6 @@ app.post("/api/user/signup", (req, res) => {
     res.send({"status": "successful"})
 })
 
-app.post("/api/exercise/select", (req, res) => {
-
-})
-
-app.post("/api/exercise/solve", (req, res) => {
-
-})
-
 app.post("/", (req, res) => {
     let number = req.body.number
     console.log(req.body)
@@ -77,20 +76,20 @@ app.post("/", (req, res) => {
     res.send({number: number})
 })
 app.get("api/exercises/list",(req,res)=>{
+    let exercisesCity =[]
     for (const exercise of  exercises [req.body.city] ){
-        let exercisesCity =[]
         exercisesCity.push ({
             "title":exercise.title,
             "description":exercise.description,
             "points":exercises.points
         })
-        exercisesCity[1].push 
-    
+        res.send(exercisesCity)
     }
-    
-    
 })
-
+app.get("/api/exercices/get",(req,res)=>{
+    let exercisesSpecial = req.city.exercises
+    res.send ([])
+})
 
 app.listen(1337, () => {
     console.log("Server started: http://localhost:1337")
