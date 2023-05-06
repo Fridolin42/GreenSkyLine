@@ -4,7 +4,7 @@ const cookieParser = require("cookie-parser")
 const users = require(__dirname + "/db/user.json")
 const exercises = require(__dirname + "/db/exercises.json")
 const fs = require("fs")
-const authenticator = require("./authenticator.js")
+const {title} = require("process")
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -16,6 +16,15 @@ app.use(cookieParser());
 app.use("/api/user/info", authenticate)
 app.use("/api/exercise/select", authenticate)
 app.use("/api/exercise/solve", authenticate)
+
+app.get("/api/user/info", (req, res, next) => {
+    let username = req.cookies.username
+    let password = req.cookies.password
+
+    let user = users[username]
+    if (user != null && user["password"] === password) next()
+    else return res.redirect("/login")
+})
 
 function authenticate(req, res, next) {
     const users = require(__dirname + "/db/user.json")
@@ -74,6 +83,19 @@ app.post("/api/user/signup", (req, res) => {
     res.send({"status": "successful"})
 })
 
+app.get("/api/exercises/list", (req, res) => {
+        let exercisesCity = []
+        for (const i in exercises[req.body.city]) {
+            exercisesCity.push({
+                "title": exercises[req.body.city][i].title,
+                "description": exercises[req.body.city][i].description,
+                "points": exercises[req.body.city][i].points
+            })
+        }
+        res.send(exercisesCity)
+    }
+)
+
 app.post("/api/exercise/select", (req, res) => {
     let exercise = req.body.exercise
     let username = req.cookies.username
@@ -98,9 +120,11 @@ app.get("/api/exercises/list", (req, res) => {
         })
 
     }
+})
+app.get("/api/exercices/get", (req, res) => {
+    let exercisesSpecial = req.city.exercises
     res.send(exercisesCity)
 })
-
 
 app.listen(1337, () => {
     console.log("Server started: http://localhost:1337")
