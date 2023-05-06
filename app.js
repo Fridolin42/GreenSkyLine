@@ -4,7 +4,6 @@ const cookieParser = require("cookie-parser")
 const users = require(__dirname + "/db/user.json")
 const exercises = require(__dirname + "/db/exercises.json")
 const fs = require("fs")
-const {title} = require("process")
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -16,15 +15,6 @@ app.use(cookieParser());
 app.use("/api/user/info", authenticate)
 app.use("/api/exercise/select", authenticate)
 app.use("/api/exercise/solve", authenticate)
-
-app.get("/api/user/info", (req, res, next) => {
-    let username = req.cookies.username
-    let password = req.cookies.password
-
-    let user = users[username]
-    if (user != null && user["password"] === password) next()
-    else return res.redirect("/login")
-})
 
 function authenticate(req, res, next) {
     const users = require(__dirname + "/db/user.json")
@@ -38,9 +28,7 @@ function authenticate(req, res, next) {
 }
 
 app.get("/api/user/info", (req, res) => {
-    let username = req.body.name
-    let usernameInCookies = req.cookies.username
-    if (username !== usernameInCookies) return res.send({"error": "no permission"})
+    let username = req.cookies.username
     console.log(username)
     if (username === "" || username === null) return res.send({"error": "no username"})
     let user = users[username]
@@ -96,6 +84,7 @@ app.get("/api/exercises/list", (req, res) => {
     }
 )
 
+//TODO Add City parameter
 app.post("/api/exercise/select", (req, res) => {
     let exercise = req.body.exercise
     let username = req.cookies.username
@@ -106,7 +95,7 @@ app.post("/api/exercise/select", (req, res) => {
 app.post("/api/exercise/solve", (req, res) => {
     let exercise = req.body.exercise
     let username = req.cookies.username
-    let city = req.body.city
+    //let city = req.body.city
     users[username].completedExercises.push(exercise)
     fs.writeFileSync(__dirname + "/db/users.json", JSON.stringify(users))
 })
