@@ -77,7 +77,8 @@ app.get("/api/exercises/list", (req, res) => {
             exercisesCity.push({
                 "title": exercises[req.body.city][i].title,
                 "description": exercises[req.body.city][i].description,
-                "points": exercises[req.body.city][i].points
+                "points": exercises[req.body.city][i].points,
+                "id": exercises[req.body.city][i].id
             })
         }
         res.send(exercisesCity)
@@ -89,15 +90,18 @@ app.post("/api/exercise/select", (req, res) => {
     let exercise = req.body.exercise
     let username = req.cookies.username
     users[username].currentExercise = exercise
-    fs.writeFileSync(__dirname + "/db/users.json", JSON.stringify(users))
+    fs.writeFileSync(__dirname + "/db/user.json", JSON.stringify(users))
+    res.send({"status": "successful"})
 })
 
 app.post("/api/exercise/solve", (req, res) => {
-    let exercise = req.body.exercise
     let username = req.cookies.username
+    let exercise = users[username].currentExercise
     //let city = req.body.city
     users[username].completedExercises.push(exercise)
-    fs.writeFileSync(__dirname + "/db/users.json", JSON.stringify(users))
+    users[username].currentExercise = ""
+    fs.writeFileSync(__dirname + "/db/user.json", JSON.stringify(users))
+    res.send({"status": "successful"})
 })
 
 app.get("/", (req, res) => {
