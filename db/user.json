@@ -1,0 +1,11 @@
+{
+  "fridolin": {
+    "name": "fridolin",
+    "password": "123456",
+    "email": "exampel42@tutanota.de",
+    "currentExercise": "",
+    "completedExercises": [
+      "2"
+    ]
+  }
+}
