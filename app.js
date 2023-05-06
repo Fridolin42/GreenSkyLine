@@ -4,6 +4,7 @@ const cookieParser = require("cookie-parser")
 const users = require(__dirname + "/db/user.json")
 const exercises =require(_dirname + "/db/exercises.json")
 const fs = require("fs")
+const authenticator = require("./authenticator.js")
 
 app.use(express.json());
 app.use(express.urlencoded({
@@ -12,14 +13,7 @@ app.use(express.urlencoded({
 
 app.use(cookieParser());
 
-app.get("/api/user/info", (req, res, next) => {
-    let username = req.cookies.username
-    let password = req.cookies.password
-
-    let user = users[username]
-    if (user != null && user["password"] === password) next()
-    else return res.redirect("/login")
-})
+app.use(authenticator)
 
 app.get("/api/user/info", (req, res) => {
     let username = req.body.name
@@ -65,6 +59,14 @@ app.post("/api/user/signup", (req, res) => {
     users[username] = user
     fs.writeFileSync(__dirname + "/db/user.json", JSON.stringify(users))
     res.send({"status": "successful"})
+})
+
+app.post("/api/exercise/select", (req, res) => {
+
+})
+
+app.post("/api/exercise/solve", (req, res) => {
+
 })
 
 app.post("/", (req, res) => {

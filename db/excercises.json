@@ -1,8 +1,25 @@
-[
-  {
-    "id": 1,
-    "title": "Vogelhaus Bauen",
-    "description": "Baue im großen Garten ein Vogelhaus",
-    "destination": "...z"
+{
+  "dresden": {
+    "1": {
+      "id": 1,
+      "title": "Vogelhaus Bauen",
+      "description": "Baue im großen Garten ein Vogelhaus",
+      "destination": "...",
+      "points": 15
+    },
+    "2": {
+      "id": 2,
+      "title": "Blumen Gießen",
+      "description": "Gieße im Herman Seidel Park die Blumen",
+      "destination": "...z",
+      "points": 10
+    },
+    "3": {
+      "id": 3,
+      "title": "Müll Sammeln",
+      "description": "Sammle in Herman Seidel Park 1 Kg Müll",
+      "destination": "...z",
+      "points": 15
+    }
   }
-]
+}
