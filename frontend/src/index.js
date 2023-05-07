@@ -2,7 +2,9 @@ $(document).ready(async () => {
     let exercises = await listExercises()
     for (const exercise of exercises) {
         console.log(exercise)
-        document.getElementById("exerciseCardHolder").appendChild(createCard(exercise.title, exercise.description, exercise.points, "https://www.youtube.com/watch?v=dQw4w9WgXcQ"))
+        document.getElementById("exerciseCardHolder")
+            .appendChild(createCard(exercise.title, exercise.description, exercise.points,
+                "/exercise?id=" + exercise.id))
     }
 })
 

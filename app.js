@@ -46,6 +46,7 @@ app.get("/api/user/info", (req, res) => {
 app.post("/api/user/login", (req, res) => {
     let username = req.body.username
     let password = req.body.password
+    console.log(username + "|" + password)
     let user = users[username]
     if (user != null && user["password"] === password)
         return res.cookie("password", password).cookie("username", username).send({"status": "Login successful!"})
@@ -73,14 +74,15 @@ app.post("/api/user/signup", (req, res) => {
     res.send({"status": "successful"})
 })
 
-app.get("/api/exercises/list", (req, res) => {
+app.get("/api/exercises/list/:city", (req, res) => {
+    let city = req.params.city
         let exercisesCity = []
-        for (const i in exercises[req.body.city]) {
+        for (const i in exercises[city]) {
             exercisesCity.push({
-                "title": exercises[req.body.city][i].title,
-                "description": exercises[req.body.city][i].description,
-                "points": exercises[req.body.city][i].points,
-                "id": exercises[req.body.city][i].id
+                "title": exercises[city][i].title,
+                "description": exercises[city][i].description,
+                "points": exercises[city][i].points,
+                "id": exercises[city][i].id
             })
         }
         res.send(exercisesCity)
@@ -109,22 +111,22 @@ app.post("/api/exercise/solve", (req, res) => {
 app.get("/", (req, res) => {
     res.send("Hello")
 })
-app.get("/api/exercises/list/:city", (req, res) => {
+// app.get("/api/exercises/list/:city", (req, res) => {
+//     let city = req.params.city
+//     let exercisesCity = []
+//     for (const i in exercises[city]) {
+//         exercisesCity.push({
+//             "title": exercises[city][i].title,
+//             "description": exercises[city][i].description,
+//             "points": exercises[city][i].points
+//         })
+//
+//     }
+//     res.send(exercisesCity)
+// })
+app.get("/api/exercises/get/:city/:id", (req, res) => {
     let city = req.params.city
-    let exercisesCity = []
-    for (const i in exercises[city]) {
-        exercisesCity.push({
-            "title": exercises[city][i].title,
-            "description": exercises[city][i].description,
-            "points": exercises[city][i].points
-        })
-
-    }
-    res.send(exercisesCity)
-})
-app.get("/api/exercises/get", (req, res) => {
-    let city = req.body.city
-    let id = req.body.id
+    let id = req.params.id
     let exercise = exercises[city][id]
     res.send(exercise)
 })

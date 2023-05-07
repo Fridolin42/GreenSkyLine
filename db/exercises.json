@@ -4,6 +4,7 @@
       "id": 1,
       "title": "Vogelhaus Bauen",
       "description": "Baue im großen Garten ein Vogelhaus",
+      "longDescription": "//TODO Hier Text einfügen für eine lange Beschreibung",
       "destination": "...",
       "points": 15
     },
@@ -11,6 +12,7 @@
       "id": 2,
       "title": "Blumen Gießen",
       "description": "Gieße im Herman Seidel Park die Blumen",
+      "longDescription": "//TODO Hier Text einfügen für eine lange Beschreibung",
       "destination": "...z",
       "points": 10
     },
@@ -18,6 +20,7 @@
       "id": 3,
       "title": "Müll Sammeln",
       "description": "Sammle in Herman Seidel Park 1 Kg Müll",
+      "longDescription": "//TODO Hier Text einfügen für eine lange Beschreibung",
       "destination": "...z",
       "points": 15
     }
