@@ -10,6 +10,8 @@ app.use(express.urlencoded({
     extended: true
 }));
 
+app.use(express.static("frontend"))
+
 app.use(cookieParser());
 
 app.use("/api/user/info", authenticate)
@@ -107,16 +109,18 @@ app.post("/api/exercise/solve", (req, res) => {
 app.get("/", (req, res) => {
     res.send("Hello")
 })
-app.get("/api/exercises/list", (req, res) => {
+app.get("/api/exercises/list/:city", (req, res) => {
+    let city = req.params.city
     let exercisesCity = []
-    for (const i in exercises[req.body.city]) {
+    for (const i in exercises[city]) {
         exercisesCity.push({
-            "title": exercises[req.body.city][i].title,
-            "description": exercises[req.body.city][i].description,
-            "points": exercises[req.body.city][i].points
+            "title": exercises[city][i].title,
+            "description": exercises[city][i].description,
+            "points": exercises[city][i].points
         })
 
     }
+    res.send(exercisesCity)
 })
 app.get("/api/exercises/get", (req, res) => {
     let city = req.body.city
