@@ -3,25 +3,28 @@
     "1": {
       "id": 1,
       "title": "Vogelhaus Bauen",
-      "description": "Baue im großen Garten ein Vogelhaus",
-      "longDescription": "//TODO Hier Text einfügen für eine lange Beschreibung",
+      "description": "Baue ein Vogelhaus um die Natur zu unterstützen.",
+      "longDescription": "Erstens bietet es Vögeln einen sicheren Ort zum Nisten und Übernachten, insbesondere in städtischen Gebieten, wo natürliche Lebensräume oft begrenzt sind. Zweitens können Vogelhäuser dazu beitragen, die Artenvielfalt in der Umgebung zu erhöhen, da sie Vögeln eine zusätzliche Nahrungsquelle bieten und somit das ökologische Gleichgewicht fördern. Unten findest du eine Anleitung, wie man ein Vogelhaus bauen kann.",
       "destination": "...",
+      "instruction": "https://youtu.be/dQw4w9WgXcQ",
       "points": 15
     },
     "2": {
       "id": 2,
-      "title": "Blumen Gießen",
-      "description": "Gieße im Herman Seidel Park die Blumen",
-      "longDescription": "//TODO Hier Text einfügen für eine lange Beschreibung",
-      "destination": "...z",
+      "title": "Pflanzen gieße",
+      "description": "Gieße ein Pflanze in deiner Nähe, wenn es längere Zeit nicht geregnet hat.",
+      "longDescription": "Vor allem im Sommer ist es sehr wichtig, kleine Pflanzen oder Bäume zu gießen. Denn häufig vertrocknen Pflanzen im Park, um dem entgegenzuwirken, kann es sehr hilfreich sein einige Pflanzen zu gießen, wenn es länger nicht geregnet hat.",
+      "destination": "...",
+      "instruction": "https://youtu.be/dQw4w9WgXcQ",
       "points": 10
     },
     "3": {
       "id": 3,
-      "title": "Müll Sammeln",
-      "description": "Sammle in Herman Seidel Park 1 Kg Müll",
-      "longDescription": "//TODO Hier Text einfügen für eine lange Beschreibung",
-      "destination": "...z",
+      "title": "Baum pflanzen",
+      "description": "Pflanze einen einen Baum, zum Beispiel in deinem Garten.",
+      "longDescription": "Zum einen tragen Bäume zur Verbesserung der Luftqualität bei, indem sie Kohlenstoffdioxid aufnehmen und Sauerstoff produzieren. Zum anderen bieten Bäume Lebensraum für zahlreiche Tierarten und tragen so zum Erhalt der Biodiversität bei. Es kann also sehr hilfreich sein, einen Baum zu pflanzen.",
+      "destination": "...",
+      "instruction": "https://youtu.be/dQw4w9WgXcQ",
       "points": 15
     }
   }

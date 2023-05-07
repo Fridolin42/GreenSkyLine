@@ -4,7 +4,7 @@ $(document).ready(async () => {
         console.log(exercise)
         document.getElementById("exerciseCardHolder")
             .appendChild(createCard(exercise.title, exercise.description, exercise.points,
-                "/exercise?id=" + exercise.id))
+                "/exercise.html?id=" + exercise.id))
     }
 })
 
